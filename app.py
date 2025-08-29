@@ -34,25 +34,29 @@ t = st.time_input('What time?', datetime.time(17, 18))
 
 st.write('You want it at', t)
 
-number = st.number_input('Pickup longtitude?', value=-73.950655)
+pickup_datetime = datetime.datetime.combine(d, t)
 
-st.write('Pickup longtitude:  ', number)
+st.write(pickup_datetime)
 
-number = st.number_input('Pickup latitude?', value=40.783282)
+pickup_longitude = st.number_input('Pickup longtitude?', value=-73.950655)
 
-st.write('Pickup latitude:  ', number)
+st.write('Pickup longtitude:  ', pickup_longitude)
 
-number = st.number_input('Dropoff longtitude?', value=-73.984365)
+pickup_latitude = st.number_input('Pickup latitude?', value=40.783282)
 
-st.write('Dropoff longtitude:  ', number)
+st.write('Pickup latitude:  ', pickup_latitude)
 
-number = st.number_input('Dropoff latitude?', value=40.769802)
+dropoff_longitude = st.number_input('Dropoff longtitude?', value=-73.984365)
 
-st.write('Dropoff latitude:  ', number)
+st.write('Dropoff longtitude:  ', dropoff_longitude)
 
-option = st.slider('How many passengers?', min_value=1, max_value=8, value=1)
+dropoff_latitude = st.number_input('Dropoff latitude?', value=40.769802)
 
-st.write('Number of passengers:  ', option)
+st.write('Dropoff latitude:  ', dropoff_latitude)
+
+passenger_count = st.slider('How many passengers?', min_value=1, max_value=8, value=1)
+
+st.write('Number of passengers:  ', passenger_count)
 
 
 '''
@@ -81,12 +85,12 @@ if url == 'https://taxifare.lewagon.ai/predict':
 '''
 
 params = dict(
-        pickup_datetime=["2013-07-06 17:18:00"],
-        pickup_longitude=[-73.950655],
-        pickup_latitude=[40.783282],
-        dropoff_longitude=[-73.984365],
-        dropoff_latitude=[40.769802],
-        passenger_count=[1],
+        pickup_datetime=[pickup_datetime],
+        pickup_longitude=[pickup_longitude],
+        pickup_latitude=[pickup_latitude],
+        dropoff_longitude=[dropoff_longitude],
+        dropoff_latitude=[dropoff_latitude],
+        passenger_count=[passenger_count],
     )
 
 data = requests.get(url, params=params).json()
